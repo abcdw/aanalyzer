@@ -1,8 +1,8 @@
-#-------------------------------------------------
+#-------------------------
 #
-# Project created by QtCreator 2013-04-30T21:02:19
+# Project created by abcdw
 #
-#-------------------------------------------------
+#-------------------------
 
 QT       += core gui
 
@@ -14,7 +14,9 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
            ui/mainwindow.cpp \
+           src/parser.cpp
 
 HEADERS  += ui/mainwindow.h \
+            src/parser.h
 
 FORMS    +=
