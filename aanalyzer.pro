@@ -14,9 +14,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
            ui/mainwindow.cpp \
-           src/parser.cpp
+           src/parser.cpp \
+           src/binarysearchtree.cpp
 
 HEADERS  += ui/mainwindow.h \
-            src/parser.h
+            src/parser.h \
+            src/binarysearchtree.h
 
 FORMS    +=
