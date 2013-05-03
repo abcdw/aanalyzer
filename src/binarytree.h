@@ -13,16 +13,16 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
-#ifndef BINARYSEARCHTREE_H
-#define BINARYSEARCHTREE_H
+#ifndef BINARYTREE_H
+#define BINARYTREE_H
 
 #include <QObject>
 
-class BinarySearchTree : public QObject
+class BinaryTree : public QObject
 {
     Q_OBJECT
 public:
-    explicit BinarySearchTree(QObject *parent = 0);
+    explicit BinaryTree(QObject *parent = 0);
     
 signals:
     
@@ -30,4 +30,4 @@ public slots:
     
 };
 
-#endif // BINARYSEARCHTREE_H
+#endif // BINARYTREE_H
