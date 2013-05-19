@@ -24,7 +24,8 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-    ui/mainwindow.cpp
+    ui/mainwindow.cpp \
+    src/ast.cpp
 
 HEADERS  += ui/mainwindow.h
 
