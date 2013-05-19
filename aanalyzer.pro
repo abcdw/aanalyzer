@@ -26,7 +26,6 @@ TEMPLATE = app
 SOURCES += main.cpp\
     ui/mainwindow.cpp
 
-HEADERS  += ui/mainwindow.h \
-    src/parser.h
+HEADERS  += ui/mainwindow.h
 
 FORMS    +=
