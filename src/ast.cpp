@@ -58,3 +58,30 @@ struct neg_impl
 };
 
 boost::phoenix::function<neg_impl> const neg = neg_impl();
+
+struct wrap_into_operation_node_impl
+{
+    template <typename T>
+    struct result;
+
+    template <
+            typename This
+          , typename Arg1
+          , typename Arg2
+          , typename Arg3
+    >
+    struct result<This(Arg1, Arg2, Arg3)>
+    {
+        typedef ast_node type;
+    };
+
+    ast_node operator() (ast_node const& left
+                       , ast_node const& right
+                       , char op) const
+    {
+        return binary_op(left, right, op);
+    }
+};
+
+boost::phoenix::function<wrap_into_operation_node_impl> const
+    wrap_into_op_node = wrap_into_operation_node_impl();
