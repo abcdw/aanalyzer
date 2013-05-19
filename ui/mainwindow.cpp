@@ -15,6 +15,8 @@
 
 #include "mainwindow.h"
 #include <QtGui>
+#include <src/astvisitor.cpp>
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
@@ -23,6 +25,26 @@ MainWindow::MainWindow(QWidget *parent) :
     QLineEdit *inputLine = new QLineEdit("1.2 + (3.7 + 0.4) * 3.75");
     QPushButton *exitButton = new QPushButton("exit");
     QWidget *mainWidget = new QWidget();
+
+    typedef std::string     str_t;
+    typedef str_t::iterator str_t_it;
+
+    str_t expression("1.2+0.5");
+
+    calc_ast_grammar<str_t_it> calc;
+
+    str_t_it begin = expression.begin(), end = expression.end();
+
+    bool success = qi::parse(begin, end, calc);
+
+    std::cout << "---------------------\n";
+    if(success && begin == end)
+        std::cout << "Parsing succeeded\n";
+    else
+        std::cout << "Parsing failed\nstopped at: "\
+                      << str_t(begin, end) << "\"\n";
+    std::cout << "---------------------\n";
+
 
     mainLayout->setSpacing(0);
     mainLayout->addWidget(inputLine);
