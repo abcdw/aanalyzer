@@ -1,6 +1,5 @@
 #include <boost/variant.hpp>
-#include <boost/phoenix.hpp>
-
+#include <boost/spirit/include/phoenix.hpp>
 struct binary_op;
 struct unary_op;
 
