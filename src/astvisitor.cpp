@@ -1,9 +1,9 @@
 #include <src/calcastgrammar.cpp>
 
 struct ast_visitor :
-        boost::static_visitor<int>
+        boost::static_visitor<double>
 {
-    int operator() (double val)
+    double operator() (double val)
     {
         return val;
     }
@@ -26,9 +26,10 @@ struct ast_visitor :
             return 0;
         }
     }
+
     double operator() (unary_op const & node) const
     {
-        int subj_val = boost::apply_visitor(*this, node.subj);
+        double subj_val = boost::apply_visitor(*this, node.subj);
 
         switch(node.op)
         {

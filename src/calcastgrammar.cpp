@@ -1,4 +1,3 @@
-#include <boost/spirit/include/qi.hpp>
 #include <src/ast.cpp>
 
 namespace qi = boost::spirit::qi;
@@ -52,6 +51,5 @@ struct calc_ast_grammar :
             std::cout << val("Error! Expecting ") << _4 << " at: \""
                 << construct<std::string>(_3, _2) << "\"\n\n");
     }
-    qi::rule<Iterator, ast_node(), qi::space_type>
-        expr, term, factor;
+    rule<Iterator, ast_node(), space_type> expr, term, factor;
 };
