@@ -4,5 +4,5 @@ aanalyzer
 simple arithmetic analyzer
 
 depends on:
- * boost 1.47+
- * Qt 4.7+
+ * [boost](http://boost.org) 1.47+
+ * [Qt](http://qt.gitorious.org) 4.7+
