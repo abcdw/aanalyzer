@@ -14,7 +14,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 #include "ui/mainwindow.h"
-#include "src/parser.h"
+#include "src/ast.cpp"
 #include <QApplication>
 
 int main(int argc, char *argv[])
