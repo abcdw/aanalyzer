@@ -26,7 +26,8 @@ TEMPLATE = app
 SOURCES += main.cpp\
     ui/mainwindow.cpp \
     src/ast.cpp \
-    src/calcastgrammar.cpp
+    src/calcastgrammar.cpp \
+    src/astvisitor.cpp
 
 HEADERS  += ui/mainwindow.h
 
