@@ -16,7 +16,7 @@
 #include "mainwindow.h"
 #include <QtGui>
 #include <src/astvisitor.cpp>
-#include <iostream>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
@@ -29,21 +29,24 @@ MainWindow::MainWindow(QWidget *parent) :
     typedef std::string     str_t;
     typedef str_t::iterator str_t_it;
 
-    str_t expression("1.2+0.5");
-
+    str_t expression("1.2 + (3.7 + 0.4) q* 3.75");
     calc_ast_grammar<str_t_it> calc;
-
     str_t_it begin = expression.begin(), end = expression.end();
+    ast_node ast;
 
-    bool success = qi::parse(begin, end, calc);
+    bool success = qi::phrase_parse(begin, end, calc, qi::space, ast);
+    double result = boost::apply_visitor(ast_visitor(), ast);
 
-    std::cout << "---------------------\n";
-    if(success && begin == end)
-        std::cout << "Parsing succeeded\n";
-    else
-        std::cout << "Parsing failed\nstopped at: "\
+    std::cerr << "\n---------------------\n";
+    if(success && begin == end) {
+        std::cerr << result << "\n";
+        std::cerr << "Parsing succeeded\n";
+    }
+    else {
+        std::cerr << "Parsing failed\nstopped at: "\
                       << str_t(begin, end) << "\"\n";
-    std::cout << "---------------------\n";
+    }
+    std::cerr << "---------------------\n";
 
 
     mainLayout->setSpacing(0);

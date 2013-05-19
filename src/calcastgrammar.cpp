@@ -24,6 +24,7 @@ struct calc_ast_grammar :
     calc_ast_grammar() :
         calc_ast_grammar::base_type(expr)
     {
+
         expr =
                 term                [_val = _1]
             >> *( '+' > term        [_val = wrap_into_op_node(_val, _1, '+')]
@@ -48,7 +49,7 @@ struct calc_ast_grammar :
         factor.name("factor");
 
         on_error<fail>(expr,
-            std::cout << val("Error! Expecting ") << _4 << " at: \""
+            std::cerr << val("Error! Expecting ") << _4 << " at: \""
                 << construct<std::string>(_3, _2) << "\"\n\n");
     }
     rule<Iterator, ast_node(), space_type> expr, term, factor;
