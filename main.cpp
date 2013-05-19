@@ -21,9 +21,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    w.setGeometry(13, 13, 500, 100);
-    w.show();
 
-    Parser pp(0);
+    w.show();
     return a.exec();
 }

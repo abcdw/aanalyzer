@@ -14,11 +14,24 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 #include "mainwindow.h"
+#include <QtGui>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
 {
+    QBoxLayout *mainLayout = new QBoxLayout(QBoxLayout::TopToBottom);
+    QLineEdit *inputLine = new QLineEdit("1.2 + (3.7 + 0.4) * 3.75");
+    QPushButton *exitButton = new QPushButton("exit");
+    QWidget *mainWidget = new QWidget();
 
+    mainLayout->setSpacing(0);
+    mainLayout->addWidget(inputLine);
+
+    mainLayout->addWidget(exitButton);
+    mainWidget->setLayout(mainLayout);
+    setCentralWidget(mainWidget);
+
+    connect(exitButton, SIGNAL(clicked()), this, SLOT(close()));
 }
 
 MainWindow::~MainWindow()
