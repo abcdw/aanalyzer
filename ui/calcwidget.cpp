@@ -12,11 +12,15 @@ CalcWidget::CalcWidget(QWidget *parent) :
 
     outputLine->setReadOnly(true);
 
-    mainLayout->addWidget(inputLine, 0, 0, 1, 4);
+    mainLayout->addWidget(inputLine, 0, 0, 1, 2);
     mainLayout->addWidget(outputLine, 1, 0, 1, 2);
-    mainLayout->addWidget(showTreeButton, 1, 2);
-    mainLayout->addWidget(exitButton, 1, 3);
+    mainLayout->addWidget(showTreeButton, 2, 0);
+    mainLayout->addWidget(exitButton, 2, 1);
     setLayout(mainLayout);
+
+    QSize p = this->size();
+    p.setWidth(500);
+    parent->resize(p);
 
     connect(exitButton, SIGNAL(clicked()), parent, SLOT(close()));
     connect(inputLine, SIGNAL(textChanged(QString)), this, SLOT(showAnswer()));
@@ -62,6 +66,6 @@ void CalcWidget::showAnswer()
         outputLine->setText(answer);
     }
     else {
-        outputLine->setText("Parsing stopped at: " + error);
+        outputLine->setText("Error at: " + error);
     }
 }
