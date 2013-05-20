@@ -22,7 +22,7 @@ CalcWidget::CalcWidget(QWidget *parent) :
     connect(inputLine, SIGNAL(textChanged(QString)), this, SLOT(showAnswer()));
 }
 
-bool CalcWidget::calcAnswer(double &ans)
+bool CalcWidget::calcAnswer(double &ans, QString &error)
 {
     typedef std::string     str_t;
     typedef str_t::iterator str_t_it;
@@ -39,26 +39,29 @@ bool CalcWidget::calcAnswer(double &ans)
     if(success && begin == end) {
         std::cerr << result << "\n";
         std::cerr << "Parsing succeeded\n";
+        ans = result;
     }
     else {
         std::cerr << "Parsing failed\nstopped at: "\
                       << str_t(begin, end) << "\"\n";
+        error = QString::fromStdString(str_t(begin, end));
     }
     std::cerr << "---------------------\n";
-    ans = result;
+
     return success && begin == end;
 }
 
 void CalcWidget::showAnswer()
 {
     double result;
-    bool calcSuccess = calcAnswer(result);
+    QString error;
+    bool calcSuccess = calcAnswer(result, error);
 
     if (calcSuccess) {
         QString answer = QString::number(result);
         outputLine->setText(answer);
     }
     else {
-        outputLine->setText("Parsing error!");
+        outputLine->setText("Parsing stopped at: " + error);
     }
 }

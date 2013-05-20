@@ -23,7 +23,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     calcWidget = new CalcWidget(this);
 
-
     setCentralWidget(calcWidget);
 }
 

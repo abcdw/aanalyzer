@@ -19,7 +19,7 @@ private:
     QLineEdit       *outputLine;
     QPushButton     *exitButton;
     QPushButton     *showTreeButton;
-    bool calcAnswer(double &ans);
+    bool calcAnswer(double &ans, QString &error);
 signals:
     
 public slots:
