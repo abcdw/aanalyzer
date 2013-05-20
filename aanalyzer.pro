@@ -27,8 +27,10 @@ SOURCES += main.cpp\
     ui/mainwindow.cpp \
     src/ast.cpp \
     src/calcastgrammar.cpp \
-    src/astvisitor.cpp
+    src/astvisitor.cpp \
+    ui/calcwidget.cpp
 
-HEADERS  += ui/mainwindow.h
+HEADERS  += ui/mainwindow.h \
+    ui/calcwidget.h
 
 FORMS    +=

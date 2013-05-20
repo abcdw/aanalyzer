@@ -17,7 +17,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include <ui/calcwidget.h>
 
 class MainWindow : public QMainWindow
 {
@@ -28,7 +28,7 @@ public:
     ~MainWindow();
     
 private:
-
+    CalcWidget *calcWidget;
 };
 
 #endif // MAINWINDOW_H
