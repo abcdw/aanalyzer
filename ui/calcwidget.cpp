@@ -5,7 +5,7 @@ CalcWidget::CalcWidget(QWidget *parent) :
     QWidget(parent)
 {
     mainLayout      = new QGridLayout(this);
-    inputLine       = new QLineEdit("1.2 + (3.7 + 0.4) * 3.75", this);
+    inputLine       = new QLineEdit(this);
     outputLine      = new QLineEdit(this);
     exitButton      = new QPushButton("exit", this);
     showTreeButton  = new QPushButton("show", this);
@@ -24,6 +24,8 @@ CalcWidget::CalcWidget(QWidget *parent) :
 
     connect(exitButton, SIGNAL(clicked()), parent, SLOT(close()));
     connect(inputLine, SIGNAL(textChanged(QString)), this, SLOT(showAnswer()));
+
+    inputLine->setText("1.2 + (3.7 + -0.4 * (10e2 - 3) ) * 3.75");
 }
 
 bool CalcWidget::calcAnswer(double &ans, QString &error)
