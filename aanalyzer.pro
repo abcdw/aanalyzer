@@ -31,4 +31,6 @@ SOURCES += main.cpp\
 
 HEADERS  += ui/mainwindow.h
 
+INCLUDEPATH += C:/boost/boost_1_53_0
+
 FORMS    +=

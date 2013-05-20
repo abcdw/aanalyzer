@@ -16,7 +16,10 @@
 #include "mainwindow.h"
 #include <QtGui>
 #include <src/astvisitor.cpp>
-
+#include <QBoxLayout>
+#include <QLineEdit>
+#include <QWidget>
+#include <QPushButton>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
@@ -29,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     typedef std::string     str_t;
     typedef str_t::iterator str_t_it;
 
-    str_t expression("1.2 + (3.7 + 0.4) q* 3.75");
+    str_t expression("1.2 + (3.7 + 0.4) * 3.75");
     calc_ast_grammar<str_t_it> calc;
     str_t_it begin = expression.begin(), end = expression.end();
     ast_node ast;
