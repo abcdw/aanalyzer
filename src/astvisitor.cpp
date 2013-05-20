@@ -46,21 +46,24 @@ struct ast_printer:
         boost::static_visitor<int>
 {
 
-    ast_printer(QString* stream_)
+    ast_printer(QTextStream* stream_)
     {
         stream = stream_;
     }
 
     int operator() (double val) const
     {
-        *stream += " qwe ";
+        *stream << "\t\t" << "n" << val << "[label=\"" << val <<"\"];" << endl;
         return 0;
     }
 
     int operator() (binary_op const& node) const
     {
-
+        *stream << "\t\t" << "n" << node.op << "[label=\"" << node.op <<"\"];" << endl;
+        *stream << "\t\tn" << node.op << "--" << "n" << node.op << ";" << endl;
         boost::apply_visitor(*this, node.left);
+        *stream << "\t\tn" << node.op << "--" << "n" << node.op << ";" << endl;
+
         boost::apply_visitor(*this, node.right);
 
         return 1;
@@ -68,12 +71,13 @@ struct ast_printer:
 
     int operator() (unary_op const & node) const
     {
+        *stream << "\t\t" << "n" << node.op << "[label=\"" << node.op <<"\"];" << endl;
         boost::apply_visitor(*this, node.subj);
 
         return 2;
     }
 
 public:
-    QString* stream;
+    QTextStream* stream;
 
 };

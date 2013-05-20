@@ -24,14 +24,13 @@ CalcWidget::CalcWidget(QWidget *parent) :
 
     connect(exitButton, SIGNAL(clicked()), parent, SLOT(close()));
     connect(inputLine, SIGNAL(textChanged(QString)), this, SLOT(showAnswer()));
-
+    connect(showTreeButton, SIGNAL(clicked()), this, SLOT(showTree()));
     inputLine->setText("1.2 + (3.7 + -0.4 * (10e2 - 3) ) * 3.75");
 }
 
 bool CalcWidget::calcAnswer(double &ans, QString &error)
 {
-    typedef std::string     str_t;
-    typedef str_t::iterator str_t_it;
+
 
     str_t expression(inputLine->text().toStdString());
     calc_ast_grammar<str_t_it> calc;
@@ -41,15 +40,10 @@ bool CalcWidget::calcAnswer(double &ans, QString &error)
     bool success = qi::phrase_parse(begin, end, calc, qi::space, ast);
     double result = boost::apply_visitor(ast_calculator(), ast);
 
-    QString str;
-
-    ast_printer printer(&str);
-    int t = boost::apply_visitor(printer, ast);
 
 
     std::cerr << "\n---------------------\n";
-    std::cerr << t << " -- " << str.toStdString() << "\n";
-    if(success && begin == end) {
+    if (success && (begin == end)) {
         std::cerr << result << "\n";
         std::cerr << "Parsing succeeded\n";
         ans = result;
@@ -61,7 +55,35 @@ bool CalcWidget::calcAnswer(double &ans, QString &error)
     }
     std::cerr << "---------------------\n";
 
-    return success && begin == end;
+    return success && (begin == end);
+}
+
+void CalcWidget::showTree()
+{
+
+    str_t expression(inputLine->text().toStdString());
+    calc_ast_grammar<str_t_it> calc;
+    str_t_it begin = expression.begin(), end = expression.end();
+    ast_node ast;
+
+    bool success = qi::phrase_parse(begin, end, calc, qi::space, ast);
+
+    QByteArray arr = QByteArray();
+    QTextStream stream(&arr, QIODevice::ReadWrite);
+    stream << "graph ""{" << endl;
+    stream << "\tnode[fontsize=10,margin=0,width=\".4\", height=\".3\"];" << endl;
+    stream << "\tsubgraph cluster17{" << endl;
+
+    ast_printer printer(&stream);
+    boost::apply_visitor(printer, ast);
+    stream << "\t}\n" << "}" << endl;
+    stream.flush();
+
+    if (success && (begin == end)) {
+        treeWidget->showTree(arr);
+        showTreeButton->setText("close");
+    }
+
 }
 
 void CalcWidget::showAnswer()

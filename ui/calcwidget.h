@@ -12,6 +12,8 @@ class CalcWidget : public QWidget
 {
     Q_OBJECT
 public:
+    typedef std::string     str_t;
+    typedef str_t::iterator str_t_it;
     explicit CalcWidget(QWidget *parent = 0);
 
 private:
@@ -27,6 +29,7 @@ signals:
     
 public slots:
     void showAnswer();
+    void showTree();
 };
 
 #endif // CALCWIDGET_H
