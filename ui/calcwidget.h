@@ -6,6 +6,7 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QString>
+#include <ui/treewidget.h>
 
 class CalcWidget : public QWidget
 {
@@ -19,6 +20,8 @@ private:
     QLineEdit       *outputLine;
     QPushButton     *exitButton;
     QPushButton     *showTreeButton;
+    TreeWidget      *treeWidget;
+
     bool calcAnswer(double &ans, QString &error);
 signals:
     

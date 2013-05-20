@@ -9,7 +9,7 @@ CalcWidget::CalcWidget(QWidget *parent) :
     outputLine      = new QLineEdit(this);
     exitButton      = new QPushButton("exit", this);
     showTreeButton  = new QPushButton("show", this);
-
+    treeWidget      = new TreeWidget(this);
     outputLine->setReadOnly(true);
 
     mainLayout->addWidget(inputLine, 0, 0, 1, 2);
