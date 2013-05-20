@@ -12,7 +12,7 @@ TreeWidget::TreeWidget(QWidget *parent) :
 
 void TreeWidget::hideTree()
 {
-    _view->hide;
+    _view->hide();
 }
 
 void TreeWidget::showTree(QByteArray &arr)

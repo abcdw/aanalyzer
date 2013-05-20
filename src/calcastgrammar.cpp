@@ -1,4 +1,6 @@
 #include <src/ast.cpp>
+#include <iostream>
+#include <string>
 
 namespace qi = boost::spirit::qi;
 namespace phx = boost::phoenix;

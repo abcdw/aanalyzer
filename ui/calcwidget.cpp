@@ -39,9 +39,16 @@ bool CalcWidget::calcAnswer(double &ans, QString &error)
     ast_node ast;
 
     bool success = qi::phrase_parse(begin, end, calc, qi::space, ast);
-    double result = boost::apply_visitor(ast_visitor(), ast);
+    double result = boost::apply_visitor(ast_calculator(), ast);
+
+    QString str;
+
+    ast_printer printer(&str);
+    int t = boost::apply_visitor(printer, ast);
+
 
     std::cerr << "\n---------------------\n";
+    std::cerr << t << " -- " << str.toStdString() << "\n";
     if(success && begin == end) {
         std::cerr << result << "\n";
         std::cerr << "Parsing succeeded\n";
