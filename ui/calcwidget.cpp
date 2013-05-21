@@ -74,8 +74,8 @@ void CalcWidget::showTree()
     stream << "\tnode[fontsize=10,margin=0,width=\".4\", height=\".3\"];" << endl;
     stream << "\tsubgraph cluster17{" << endl;
 
-    ast_printer printer(&stream);
-    boost::apply_visitor(printer, ast);
+    //ast_printer printer(&stream);
+    //boost::apply_visitor(printer, ast);
     stream << "\t}\n" << "}" << endl;
     stream.flush();
 

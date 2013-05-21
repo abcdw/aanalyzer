@@ -29,11 +29,13 @@ SOURCES += main.cpp\
     src/astvisitor.cpp \
     ui/calcwidget.cpp \
     ui/treewidget.cpp \
-    src/ast.cpp
+    src/ast.cpp \
+    src/astree.cpp
 
 HEADERS  += ui/mainwindow.h \
     ui/calcwidget.h \
-    ui/treewidget.h
+    ui/treewidget.h \
+    src/astree.h
 
 INCLUDEPATH += C:/boost/boost_1_53_0
 

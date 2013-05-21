@@ -1,5 +1,6 @@
 #include <src/calcastgrammar.cpp>
 #include <QTextStream>
+#include <src/astree.h>
 
 struct ast_calculator:
         boost::static_visitor<double>
@@ -42,42 +43,29 @@ struct ast_calculator:
     }
 };
 
-struct ast_printer:
-        boost::static_visitor<int>
+struct ast_converter:
+        boost::static_visitor<ASNode>
 {
 
-    ast_printer(QTextStream* stream_)
+    ASNode operator() (double value_) const
     {
-        stream = stream_;
+        return ASNode(value_);
     }
 
-    int operator() (double val) const
+    ASNode operator() (binary_op const& node) const
     {
-        *stream << "\t\t" << "n" << val << "[label=\"" << val <<"\"];" << endl;
-        return 0;
+        ASNode* n1 = new ASNode(boost::apply_visitor(*this, node.left));
+        ASNode* n2 = new ASNode(boost::apply_visitor(*this, node.right));
+        ASNode tmp(n1, n2, node.op);
+
+        return tmp;
     }
 
-    int operator() (binary_op const& node) const
+    ASNode operator() (unary_op const & node) const
     {
-        *stream << "\t\t" << "n" << node.op << "[label=\"" << node.op <<"\"];" << endl;
-        *stream << "\t\tn" << node.op << "--" << "n" << node.op << ";" << endl;
-        boost::apply_visitor(*this, node.left);
-        *stream << "\t\tn" << node.op << "--" << "n" << node.op << ";" << endl;
+        ASNode tmp(new ASNode(boost::apply_visitor(*this, node.subj)), node.op);
 
-        boost::apply_visitor(*this, node.right);
-
-        return 1;
+        return tmp;
     }
-
-    int operator() (unary_op const & node) const
-    {
-        *stream << "\t\t" << "n" << node.op << "[label=\"" << node.op <<"\"];" << endl;
-        boost::apply_visitor(*this, node.subj);
-
-        return 2;
-    }
-
-public:
-    QTextStream* stream;
 
 };
