@@ -1,5 +1,9 @@
 #include "calcwidget.h"
 #include <src/astvisitor.cpp>
+#include <string>
+#include <map>
+
+typedef std::map<char, double> vmap;
 
 CalcWidget::CalcWidget(QWidget *parent) :
     QWidget(parent)
@@ -36,9 +40,14 @@ bool CalcWidget::calcAnswer(double &ans, QString &error)
     calc_ast_grammar<str_t_it> calc;
     str_t_it begin = expression.begin(), end = expression.end();
     ast_node ast;
+    vmap vars;
+
+    vars['x'] = 3;
+    vars['y'] = 10;
 
     bool success = qi::phrase_parse(begin, end, calc, qi::space, ast);
-    double result = boost::apply_visitor(ast_calculator(), ast);
+
+    double result = boost::apply_visitor(ast_calculator(&vars), ast);
 
 
 

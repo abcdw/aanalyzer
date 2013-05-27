@@ -1,13 +1,27 @@
 #include <src/calcastgrammar.cpp>
 #include <QTextStream>
 #include <src/astree.h>
+#include <string>
+#include <map>
+
+typedef std::map<char, double> vmap;
 
 struct ast_calculator:
         boost::static_visitor<double>
 {
+    ast_calculator(vmap *vars_)
+    {
+        vars = vars_;
+    }
+
     double operator() (double val) const
     {
         return val;
+    }
+
+    double operator() (char c) const
+    {
+        return (double)(*vars)[c];
     }
 
     double operator() (binary_op const& node) const
@@ -41,6 +55,7 @@ struct ast_calculator:
             return 0;
         }
     }
+    vmap *vars;
 };
 
 struct ast_converter:

@@ -4,13 +4,14 @@
 #include <boost/spirit/include/phoenix.hpp>
 #include <boost/variant.hpp>
 #include <boost/spirit/include/qi.hpp>
-
+#include <string>
 
 struct binary_op;
 struct unary_op;
 
 typedef boost::variant<
     double
+  , char
   , boost::recursive_wrapper<binary_op>
   , boost::recursive_wrapper<unary_op>
 > ast_node;
