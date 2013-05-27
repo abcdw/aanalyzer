@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     ui/calcwidget.cpp \
     ui/treewidget.cpp \
     src/ast.cpp \
-    src/astree.cpp
+    src/astree.cpp \
+    src/varvaluegrammar.cpp
 
 HEADERS  += ui/mainwindow.h \
     ui/calcwidget.h \

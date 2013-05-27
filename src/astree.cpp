@@ -1,4 +1,5 @@
 #include "astree.h"
+#include <iostream>
 
 QString ASNode::getNodeKey() const
 {
@@ -13,6 +14,8 @@ ASNode::ASNode()
 ASNode::ASNode(double value_)
 {
     key      = QString::number(value_);
+    left     = NULL;
+    right    = NULL;
     nodeType = leaf;
 }
 
@@ -20,6 +23,7 @@ ASNode::ASNode(ASNode* child_, char op_)
 {
     key      = QString(op_);
     left     = child_;
+    right    = NULL;
     nodeType = unaryOp;
 }
 
@@ -38,6 +42,7 @@ ASTree::ASTree(ASNode* root_)
 
 void ASTree::graphWalk(ASNode* node_, QTextStream* stream_)
 {
+    std::cerr << node_->getNodeKey().toStdString() << std::endl;
     if (node_ != NULL) {
         *stream_ << "\t\t" << "n" << node_->getNodeKey() << "[label=\"" << node_->getNodeKey() <<"\"];" << endl;
 
