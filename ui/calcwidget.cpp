@@ -103,7 +103,7 @@ void CalcWidget::showTree()
     tree.graphWalk(tree._root, &stream);
     stream << "\t}\n" << "}" << endl;
     stream.flush();
-
+    //std::cerr << stream.string()->toStdString();
     if (success && (begin == end)) {
         treeWidget->showTree(arr);
         //showTreeButton->setText("close");

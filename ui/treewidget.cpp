@@ -1,6 +1,7 @@
 #include "treewidget.h"
 #include <QGraphicsGridLayout>
 #include <QPushButton>
+#include <QDebug>
 
 TreeWidget::TreeWidget(QWidget *parent) :
     QWidget(parent)
@@ -15,8 +16,10 @@ void TreeWidget::hideTree()
     _view->hide();
 }
 
-void TreeWidget::showTree(QByteArray &arr)
+void TreeWidget::showTree(QByteArray arr)
 {
+    _scene->clear();
+    qDebug() << arr;
     QProcess* p = new QProcess();
 
     p->setProcessChannelMode(QProcess::MergedChannels);

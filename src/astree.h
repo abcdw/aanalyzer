@@ -16,10 +16,12 @@ struct ASNode{
     ASNode(ASNode* child_, char op_);
     ASNode(ASNode* left_, ASNode* right_, char op_);
     QString getNodeKey() const;
+    int getNodeId() const;
     NodeType nodeType;
     ASNode *left;
     ASNode *right;
     QString key;
+    int id;
 };
 
 class ASTree
