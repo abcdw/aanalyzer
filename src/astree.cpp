@@ -6,9 +6,27 @@ QString ASNode::getNodeKey() const
     return key;
 }
 
+int ASNode::getNodeId() const
+{
+    return id;
+}
+
+void ASNode::setNodeId(int id_)
+{
+    id = id_;
+}
+
 ASNode::ASNode()
 {
 
+}
+
+ASNode::ASNode(char c)
+{
+    key      = QString(c);
+    left     = NULL;
+    right    = NULL;
+    nodeType = leaf;
 }
 
 ASNode::ASNode(double value_)
@@ -44,23 +62,16 @@ void ASTree::graphWalk(ASNode* node_, QTextStream* stream_)
 {
     std::cerr << node_->getNodeKey().toStdString() << std::endl;
     if (node_ != NULL) {
-        *stream_ << "\t\t" << "n" << node_->getNodeKey() << "[label=\"" << node_->getNodeKey() <<"\"];" << endl;
+        *stream_ << "\t\t" << "n" << node_->getNodeId() << "[label=\"" << node_->getNodeKey() <<"\"];" << endl;
 
         if (node_->left != NULL) {
-            *stream_ << "\t\tn" << node_->getNodeKey() << "--" << "n" << node_->left->getNodeKey() << ";" << endl;
+            *stream_ << "\t\tn" << node_->getNodeId() << "--" << "n" << node_->left->getNodeId() << ";" << endl;
             graphWalk(node_->left, stream_);
-        }
-        else {
-            *stream_ << "\t\t" << "n" << node_->getNodeKey() << "leftNull" << "[style=\"filled\",label=\"NULL\"];" << endl;
-            *stream_ << "\t\tn" << node_->getNodeKey() << "--" << "n" << node_->getNodeKey() << "leftNull" << endl;
         }
 
         if (node_->right != NULL) {
-            *stream_ << "\t\tn" << node_->getNodeKey() << "--" << "n" << node_->right->getNodeKey() << ";" << endl;
+            *stream_ << "\t\tn" << node_->getNodeId() << "--" << "n" << node_->right->getNodeId() << ";" << endl;
             graphWalk(node_->right, stream_);
-        } else {
-            *stream_ << "\t\t" << "n" << node_->getNodeKey() << "rightNull" << "[style=\"filled\",label=\"NULL\"];" << endl;
-            *stream_ << "\t\tn" << node_->getNodeKey() << "--" << "n" << node_->getNodeKey() << "rightNull" << endl;
         }
     }
 }

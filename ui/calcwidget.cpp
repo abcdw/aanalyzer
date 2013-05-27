@@ -97,13 +97,13 @@ void CalcWidget::showTree()
     stream << "graph ""{" << endl;
     stream << "\tnode[fontsize=10,margin=0,width=\".4\", height=\".3\"];" << endl;
     stream << "\tsubgraph cluster17{" << endl;
-
-    ASTree tree(new ASNode(boost::apply_visitor(ast_converter(), ast)));
+    int nodeCount = 0;
+    ASTree tree(new ASNode(boost::apply_visitor(ast_converter(&nodeCount), ast)));
     //std::cerr << (tree._root->left->getNode());
     tree.graphWalk(tree._root, &stream);
     stream << "\t}\n" << "}" << endl;
     stream.flush();
-
+    //std::cerr << stream.string()->toStdString();
     if (success && (begin == end)) {
         treeWidget->showTree(arr);
         //showTreeButton->setText("close");

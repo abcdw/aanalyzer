@@ -19,7 +19,7 @@ public:
 signals:
     
 public slots:
-    void showTree(QByteArray &arr);
+    void showTree(QByteArray arr);
     void hideTree();
 };
 

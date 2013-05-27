@@ -61,10 +61,24 @@ struct ast_calculator:
 struct ast_converter:
         boost::static_visitor<ASNode>
 {
+    ast_converter(int *nodeCount_)
+    {
+        nodeCount = nodeCount_;
+    }
+
+    ASNode operator() (char c) const
+    {
+        ASNode t(c);
+        t.setNodeId((*nodeCount)++);
+        return t;
+    }
 
     ASNode operator() (double value_) const
     {
-        return ASNode(value_);
+
+        ASNode t(value_);
+        t.setNodeId((*nodeCount)++);
+        return t;
     }
 
     ASNode operator() (binary_op const& node) const
@@ -72,7 +86,7 @@ struct ast_converter:
         ASNode* n1 = new ASNode(boost::apply_visitor(*this, node.left));
         ASNode* n2 = new ASNode(boost::apply_visitor(*this, node.right));
         ASNode tmp(n1, n2, node.op);
-
+        tmp.setNodeId((*nodeCount)++);
         return tmp;
     }
 
@@ -82,5 +96,5 @@ struct ast_converter:
 
         return tmp;
     }
-
+    int *nodeCount;
 };
